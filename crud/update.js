@@ -2,11 +2,21 @@ require("../connection");
 
 const User = require("../models/User");
 
-const updateUsers = async () => {
-  const user = await User.updateOne({username: 'fazt'}, {
-    password: 'security'
-  });
-  console.log(user)
+const findAndUpdateUser = async () => {
+  const user = await User.findOne({ username: "Joe" });
+  console.log(user);
+  user.password = "minuevacontrasena";
+  user.save();
 };
 
-updateUsers();
+const updateUsers = async () => {
+  const user = await User.updateOne(
+    { username: "fazt" },
+    {
+      password: "security",
+    }
+  );
+  console.log(user);
+};
+
+findAndUpdateUser();
