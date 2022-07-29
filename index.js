@@ -1,14 +1,16 @@
-const mongoose = require("mongoose");
+require("./connection");
 
-const uri = "mongodb://localhost:27017/mywebstore";
-const db = mongoose.connection;
+const Product = require("./models/Product");
 
-mongoose.connect(uri);
-
-db.once("open", (_) => {
-  console.log("Database is connected to ", uri);
-}).catch((err) => console.log(err));
-
-db.on("error", (err) => {
-  console.log(err);
+const product = new Product({
+  name: "Laptop",
+  description: "lenovo thinpak x1 carbon 6th generation",
+  price: 1300.99,
 });
+
+product.save((err, document) => {
+  if (err) console.log(err);
+  console.log(document);
+});
+
+console.log(product);
